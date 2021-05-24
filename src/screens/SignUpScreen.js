@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { googleSignInStart } from '../redux/user/user.actions';
+import { useNavigation } from '@react-navigation/native';
+
 import {
   StyleSheet,
   View,
@@ -12,23 +16,22 @@ import {
   TouchableWithoutFeedback,
   Platform
 } from 'react-native';
-import 'firebase/firestore';
+
 import firebase from 'firebase';
 import * as Google from 'expo-auth-session/providers/google';
 import * as Segment from 'expo-analytics-segment';
-import { useNavigation } from '@react-navigation/native';
+import * as WebBrowser from 'expo-web-browser';
 export const isAndroid = () => Platform.OS === 'android';
 import {
   ANDROID_CLIENT_ID,
 } from '@env';
-import * as WebBrowser from 'expo-web-browser';
-import { ResponseType } from 'expo-auth-session';
 
 
 WebBrowser.maybeCompleteAuthSession();
 
 const SignUpScreen = () => {
   const androidClientId = ANDROID_CLIENT_ID;
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
@@ -47,7 +50,6 @@ const SignUpScreen = () => {
   }
 
   function renderLoading() {
-   
     if (loading) {
       return (
         <View>
@@ -87,10 +89,7 @@ const SignUpScreen = () => {
 
   useEffect(() => {
     if (response?.type === 'success') {
-      const { id_token } = response.params;
-      
-      const credential = firebase.auth.GoogleAuthProvider.credential(id_token);
-      firebase.auth().signInWithCredential(credential);
+      dispatch(googleSignInStart(response));
     }
   }, [response]);
 

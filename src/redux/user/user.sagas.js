@@ -4,11 +4,13 @@ import UserActionTypes from './user.types';
 
 import { 
   auth, 
-  googleProvider, 
   createUserProfileDocument,
-  getCurrentUser
+  getCurrentUser,
+  authSignInWithGoogle
 } from '../../firebase/firebase.utils';
+
 import { signInFailure, signInSuccess, signOutFailure, signOutSuccess, signUpFailure, signUpSuccess } from './user.actions';
+
 
 export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   try {
@@ -25,9 +27,10 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   }
 };
 
-export function* signInWithGoogle() {
+export function* signInWithGoogle({payload: { params }}) {
+  const { id_token } = params;
   try {
-    const {user} = yield auth.signInWithPopup(googleProvider);
+    const { user } = yield authSignInWithGoogle(id_token);
     yield getSnapshotFromUserAuth(user);
   } catch(err) {
     yield put(

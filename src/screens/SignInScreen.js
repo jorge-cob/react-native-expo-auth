@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from 'react-redux';
+import { googleSignInStart } from '../redux/user/user.actions';
+import { useNavigation } from '@react-navigation/native';
+
 import {
   StyleSheet,
   View,
@@ -10,20 +14,21 @@ import {
   ActivityIndicator,
   TouchableWithoutFeedback,
   Keyboard
-} from "react-native";
-import "firebase/firestore";
-import firebase from "firebase";
+} from 'react-native';
+
+import firebase from 'firebase';
 import * as Google from 'expo-auth-session/providers/google';
-import { useNavigation } from '@react-navigation/native';
-import {
-  ANDROID_CLIENT_ID,
-} from '@env';
 import * as WebBrowser from 'expo-web-browser';
+import {
+  ANDROID_CLIENT_ID,  
+} from '@env';
 
 
 WebBrowser.maybeCompleteAuthSession();
+
 const SignInScreen = () => {
   const androidClientId = ANDROID_CLIENT_ID;
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -61,20 +66,15 @@ const SignInScreen = () => {
           }
       });
   }
-
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
     {
       clientId: androidClientId,
     },
   );
-  
 
   useEffect(() => {
     if (response?.type === 'success') {
-      const { id_token } = response.params;
-      
-      const credential = firebase.auth.GoogleAuthProvider.credential(id_token);
-      firebase.auth().signInWithCredential(credential);
+      dispatch(googleSignInStart(response));
     }
   }, [response]);
     
@@ -133,7 +133,7 @@ const SignInScreen = () => {
               onPress={() => {
                 promptAsync();
               }} 
-              disabled={!request}  
+              disabled={!request} 
             >
               <View style={styles.googleButton}>
                 <Text
