@@ -24,16 +24,11 @@ import {
 import * as WebBrowser from 'expo-web-browser';
 import { ResponseType } from 'expo-auth-session';
 
-const androidClientId = {
-  ANDROID_CLIENT_ID,
-}
-console.log('androidClientId', androidClientId);
-
 
 WebBrowser.maybeCompleteAuthSession();
 
-
 const SignUpScreen = () => {
+  const androidClientId = ANDROID_CLIENT_ID;
   const navigation = useNavigation();
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
@@ -85,7 +80,7 @@ const SignUpScreen = () => {
 
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
     {
-      clientId: ANDROID_CLIENT_ID,
+      clientId: androidClientId,
     },
   );
   

@@ -20,11 +20,10 @@ import {
 } from '@env';
 import * as WebBrowser from 'expo-web-browser';
 
+
 WebBrowser.maybeCompleteAuthSession();
-
-
-
 const SignInScreen = () => {
+  const androidClientId = ANDROID_CLIENT_ID;
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -65,7 +64,7 @@ const SignInScreen = () => {
 
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
     {
-      clientId: ANDROID_CLIENT_ID,
+      clientId: androidClientId,
     },
   );
   
