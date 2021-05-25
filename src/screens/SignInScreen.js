@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { googleSignInStart } from '../redux/user/user.actions';
 import { useNavigation } from '@react-navigation/native';
 
 import {
@@ -11,17 +10,17 @@ import {
   SafeAreaView,
   TouchableOpacity,
   KeyboardAvoidingView,
-  ActivityIndicator,
   TouchableWithoutFeedback,
   Keyboard
 } from 'react-native';
 
-import firebase from 'firebase';
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 import {
   ANDROID_CLIENT_ID,  
 } from '@env';
+
+import { emailSignInStart, googleSignInStart } from '../redux/user/user.actions';
 
 
 WebBrowser.maybeCompleteAuthSession();
@@ -32,39 +31,12 @@ const SignInScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [loading, setLoading] = useState(false);
 
-  function onLoginSuccess() {
-    navigation.navigate('App');
-  }
-  function onLoginFailure(errorMessage) {
-    setErrorMessage(errorMessage);
-    setLoading(false);
-  }
-  function renderLoading() {
-    if (loading) {
-      return (
-        <View>
-          <ActivityIndicator size={'large'} />
-        </View>
-      );
-    }
-  }
+ 
   async function signInWithEmail() {
-    await firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => onLoginSuccess())
-      .catch(error => {
-          let errorCode = error.code;
-          let errorMessage = error.message;
-          if (errorCode == 'auth/weak-password') {
-              onLoginFailure('Weak Password!');
-          } else {
-              onLoginFailure(errorMessage);
-          }
-      });
+    dispatch(emailSignInStart({email, password}));
+    setEmail('');
+    setPassword('');
   }
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
     {
@@ -111,17 +83,6 @@ const SignInScreen = () => {
                 onChangeText={value => setPassword(value)}
               />
             </View>
-            {renderLoading()}
-            <Text
-              style={{
-                fontSize: 18,
-                textAlign: "center",
-                color: "red",
-                width: "80%"
-              }}
-            >
-              {errorMessage}
-            </Text>
             <TouchableOpacity
               style={{ width: '86%', marginTop: 10 }}
               onPress={signInWithEmail}>
