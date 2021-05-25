@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
@@ -10,8 +10,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Keyboard,
   TouchableWithoutFeedback,
-  Keyboard
 } from 'react-native';
 
 import * as Google from 'expo-auth-session/providers/google';
@@ -57,27 +57,27 @@ const SignInScreen = () => {
         }}
       >
         <SafeAreaView style={{ flex: 1 }}>
-          <KeyboardAvoidingView style={styles.container} behavior="padding">
-            <Text style={{ fontSize: 32, fontWeight: "700", color: "gray" }}>
+          <KeyboardAvoidingView style={styles.container} behavior='padding'>
+            <Text style={{ fontSize: 32, fontWeight: '700', color: 'gray' }}>
               App Name
             </Text>
             <View style={styles.form}>
               <TextInput
                 style={styles.input}
-                placeholder="Email"
-                placeholderTextColor="#B1B1B1"
-                returnKeyType="next"
-                keyboardType="email-address"
-                textContentType="emailAddress"
+                placeholder='Email'
+                placeholderTextColor='#B1B1B1'
+                returnKeyType='next'
+                keyboardType='email-address'
+                textContentType='emailAddress'
                 value={email}
                 onChangeText={value => setEmail(value)}
               />
               <TextInput
                 style={styles.input}
-                placeholder="Password"
-                placeholderTextColor="#B1B1B1"
-                returnKeyType="done"
-                textContentType="newPassword"
+                placeholder='Password'
+                placeholderTextColor='#B1B1B1'
+                returnKeyType='done'
+                textContentType='newPassword'
                 secureTextEntry={true}
                 value={password}
                 onChangeText={value => setPassword(value)}
@@ -90,7 +90,7 @@ const SignInScreen = () => {
             </TouchableOpacity>
          
             <TouchableOpacity 
-              style={{ width: "86%", marginTop: 10 }}
+              style={{ width: '86%', marginTop: 10 }}
               onPress={() => {
                 promptAsync();
               }} 
@@ -101,7 +101,7 @@ const SignInScreen = () => {
                   style={{
                     letterSpacing: 0.5,
                     fontSize: 16,
-                    color: "#707070"
+                    color: '#707070'
                   }}
                 >
                   Continue with Google
@@ -110,9 +110,9 @@ const SignInScreen = () => {
             </TouchableOpacity>
             <View style={{ marginTop: 10 }}>
               <Text
-                style={{ fontWeight: "200", fontSize: 17, textAlign: "center" }}
+                style={{ fontWeight: '200', fontSize: 17, textAlign: 'center' }}
                 onPress={() => {
-                  navigation.navigate("SignUp");
+                  navigation.navigate('SignUp');
                 }}
               >
                 Don't have an Account?
@@ -126,11 +126,11 @@ const SignInScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
-    alignItems: "center"
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   form: {
-    width: "86%",
+    width: '86%',
     marginTop: 15
   },
   logo: {
@@ -138,28 +138,28 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 20,
-    borderColor: "#707070",
+    borderColor: '#707070',
     borderBottomWidth: 1,
     paddingBottom: 1.5,
     marginTop: 25.5
   },
   button: {
-    backgroundColor: "#3A559F",
+    backgroundColor: '#3A559F',
     height: 44,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 22
   },
   googleButton: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
     height: 44,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 22,
     borderWidth: 1,
-    borderColor: "#707070"
+    borderColor: '#707070'
   }
 });
 

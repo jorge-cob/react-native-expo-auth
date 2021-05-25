@@ -30,12 +30,12 @@ const DashboardWithValidation = () => {
         screenOptions={{ gestureEnabled: false }}
       >
         <Stack.Screen
-          name="Auth"
+          name='Auth'
           component={AuthNavigator}
           options={{ title: 'My app', headerShown: false }}
         />
         <Stack.Screen
-          name="App"
+          name='App'
           component={HomeScreen}
           initialParams={{ user: 'me' }}
           options={{ headerShown: false }}

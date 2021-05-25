@@ -18,11 +18,8 @@ const HomeScreen = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <Text>{user.email}</Text>
-        <Button title="Log Off" onPress={() => {
+        <Button title='Log Off' onPress={() => {
           firebase.auth().signOut();
-        /*  analytics.identify("test", {
-              email: "this.state.email"
-            });*/
         }}/>
       </View>
     </SafeAreaView>

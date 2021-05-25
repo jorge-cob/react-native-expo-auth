@@ -1,14 +1,14 @@
-import firebase from "firebase";
+import firebase from 'firebase';
 import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-  apiKey: "AIzaSyD21_Ld93yO70mb8p3wV7vZacp9vqUce2w",
-  authDomain: "wholist-db.firebaseapp.com",
-  projectId: "wholist-db",
-  storageBucket: "wholist-db.appspot.com",
-  messagingSenderId: "149014277771",
-  appId: "1:149014277771:web:1ad9400fc15b803caaae8e"
+  apiKey: 'AIzaSyD21_Ld93yO70mb8p3wV7vZacp9vqUce2w',
+  authDomain: 'wholist-db.firebaseapp.com',
+  projectId: 'wholist-db',
+  storageBucket: 'wholist-db.appspot.com',
+  messagingSenderId: '149014277771',
+  appId: '1:149014277771:web:1ad9400fc15b803caaae8e'
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {

@@ -63,36 +63,36 @@ const SignUpScreen = () => {
       }}
     >
       <SafeAreaView style={{ flex: 1 }}>
-        <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <KeyboardAvoidingView style={styles.container} behavior='padding'>
           <Text style={{ fontSize: 32, fontWeight: '700', color: 'gray' }}>
             App Name
           </Text>
           <View style={styles.form}>
             <TextInput
               style={styles.input}
-              placeholder="Name"
-              placeholderTextColor="#B1B1B1"
-              returnKeyType="next"
-              textContentType="name"
+              placeholder='Name'
+              placeholderTextColor='#B1B1B1'
+              returnKeyType='next'
+              textContentType='name'
               value={displayName}
               onChangeText={value => setDisplayName(value)}
             />
             <TextInput
               style={styles.input}
-              placeholder="Email"
-              placeholderTextColor="#B1B1B1"
-              returnKeyType="next"
-              keyboardType="email-address"
-              textContentType="emailAddress"
+              placeholder='Email'
+              placeholderTextColor='#B1B1B1'
+              returnKeyType='next'
+              keyboardType='email-address'
+              textContentType='emailAddress'
               value={email}
               onChangeText={value => setEmail(value)}
             />
             <TextInput
               style={styles.input}
-              placeholder="Password"
-              placeholderTextColor="#B1B1B1"
-              returnKeyType="done"
-              textContentType="newPassword"
+              placeholder='Password'
+              placeholderTextColor='#B1B1B1'
+              returnKeyType='done'
+              textContentType='newPassword'
               secureTextEntry={true}
               value={password}
               onChangeText={value => setPassword(value)}
