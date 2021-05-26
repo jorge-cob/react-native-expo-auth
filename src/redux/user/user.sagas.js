@@ -6,7 +6,8 @@ import {
   auth, 
   createUserProfileDocument,
   getCurrentUser,
-  authSignInWithGoogle
+  authSignInWithGoogle,
+  signoutUser
 } from '../../firebase/firebase.utils';
 
 import { signInFailure, signInSuccess, signOutFailure, signOutSuccess, signUpFailure, signUpSuccess } from './user.actions';
@@ -62,7 +63,7 @@ export function* isUserAuthenticated() {
 
 export function* signOut() {
   try {
-    yield auth.signOut();
+    yield signoutUser();
     yield put(signOutSuccess());
   } catch(err) {
     yield put(signOutFailure(err));

@@ -51,6 +51,7 @@ export const getCurrentUser = () => {
   });
 };
 
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
@@ -59,7 +60,8 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
 export async function authSignInWithGoogle (id_token) {
   const credential = firebase.auth.GoogleAuthProvider.credential(id_token);
   return await firebase.auth().signInWithCredential(credential);
- 
 }
+
+export async function signoutUser() { firebase.auth().signOut(); };
 
 export default firebase;

@@ -1,18 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import { createStructuredSelector } from 'reselect';
 import { useNavigation } from '@react-navigation/native';
-import firebase from 'firebase';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../redux/user/user.selectors';
 const LoadingScreen = () => {
     const navigation = useNavigation();
+    const {user} = useSelector(createStructuredSelector({
+      user: selectCurrentUser,
+    }));
+    const [currentUser, setCurrentUser] = useState({});
+
     useEffect(() => {
-      firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          navigation.navigate('App');
-        } else {
-          navigation.navigate('SignUp');
-        }
-      });
+      setCurrentUser(user);
     }, [])
+  
+    useEffect(() => {
+      if (!currentUser) {
+        navigation.navigate('SignIn');
+      }
+    }, [currentUser])
     
     return (
       <View style={styles.container}>

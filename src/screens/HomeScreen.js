@@ -1,26 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';
-import firebase from 'firebase';
+
+import { useDispatch } from 'react-redux';
+import { signOutStart } from '../redux/user/user.actions';
 
 
-const HomeScreen = () => {
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((aUser) => {
-      if (aUser != null) {
-        setUser(aUser);
-      }
-    })
-  }, [])
+const HomeScreen = user => {
+  const dispatch = useDispatch();
+ 
+  const handleLogout = () => {
+    dispatch(signOutStart());
+  };
   
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
-        <Text>{user.email}</Text>
-        <Button title='Log Off' onPress={() => {
-          firebase.auth().signOut();
-        }}/>
+        <Text>{user.user.email}</Text>
+        <Button title='Log Off' onPress={handleLogout}/>
       </View>
     </SafeAreaView>
   );
