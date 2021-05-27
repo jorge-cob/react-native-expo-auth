@@ -97,12 +97,14 @@ const SignUpScreen = () => {
               onChangeText={value => setPassword(value)}
             />
           </View>
+
           <TouchableOpacity
-            style={{ width: '86%', marginTop: 10 }}
+            style={styles.signButton}
             onPress={signInWithEmail}
           >
               <Text>Sign Up</Text>
           </TouchableOpacity>
+
           <View style={styles.form}>
             <GoogleButton 
               onPress={() => {
@@ -113,9 +115,10 @@ const SignUpScreen = () => {
               Continue with Google 
             </GoogleButton>
           </View>
+
           <View style={{ marginTop: 10 }}>
             <Text
-              style={{ fontWeight: '200', fontSize: 17, textAlign: 'center' }}
+              style={styles.switchInAndUpText}
               onPress={() => {
                 navigation.navigate('SignIn');
               }}
@@ -144,6 +147,23 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingBottom: 1.5,
     marginTop: 25.5
+  },
+  signButton: {
+    width: 80, 
+    height: 38,
+    marginTop: 10,
+    backgroundColor: '#24A0ED',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    marginLeft: 25,
+    alignSelf:'flex-start'
+  },
+  switchInAndUpText: {
+    fontWeight: '200', 
+    fontSize: 17, 
+    textAlign: 'center', 
+    textDecorationLine: 'underline'
   },
 });
 
