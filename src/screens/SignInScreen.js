@@ -21,6 +21,7 @@ import {
 } from '@env';
 
 import { emailSignInStart, googleSignInStart } from '../redux/user/user.actions';
+import GoogleButton from '../components/google-button/google-button.component';
 
 
 WebBrowser.maybeCompleteAuthSession();
@@ -58,9 +59,6 @@ const SignInScreen = () => {
       >
         <SafeAreaView style={{ flex: 1 }}>
           <KeyboardAvoidingView style={styles.container} behavior='padding'>
-            <Text style={{ fontSize: 32, fontWeight: '700', color: 'gray' }}>
-              App Name
-            </Text>
             <View style={styles.form}>
               <TextInput
                 style={styles.input}
@@ -88,26 +86,16 @@ const SignInScreen = () => {
               onPress={signInWithEmail}>
                   <Text>Sign In</Text>
             </TouchableOpacity>
-         
-            <TouchableOpacity 
-              style={{ width: '86%', marginTop: 10 }}
-              onPress={() => {
-                promptAsync();
-              }} 
-              disabled={!request} 
-            >
-              <View style={styles.googleButton}>
-                <Text
-                  style={{
-                    letterSpacing: 0.5,
-                    fontSize: 16,
-                    color: '#707070'
-                  }}
-                >
-                  Continue with Google
-                </Text>
-              </View>
-            </TouchableOpacity>
+            <View style={styles.form}>
+              <GoogleButton 
+                onPress={() => {
+                  promptAsync();
+                }} 
+                color='#707070'
+              > 
+                Continue with Google 
+              </GoogleButton>
+            </View>
             <View style={{ marginTop: 10 }}>
               <Text
                 style={{ fontWeight: '200', fontSize: 17, textAlign: 'center' }}
@@ -133,9 +121,6 @@ const styles = StyleSheet.create({
     width: '86%',
     marginTop: 15
   },
-  logo: {
-    marginTop: 20
-  },
   input: {
     fontSize: 20,
     borderColor: '#707070',
@@ -143,24 +128,6 @@ const styles = StyleSheet.create({
     paddingBottom: 1.5,
     marginTop: 25.5
   },
-  button: {
-    backgroundColor: '#3A559F',
-    height: 44,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 22
-  },
-  googleButton: {
-    backgroundColor: '#FFFFFF',
-    height: 44,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 22,
-    borderWidth: 1,
-    borderColor: '#707070'
-  }
 });
 
 export default SignInScreen;
