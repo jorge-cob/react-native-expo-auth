@@ -1,5 +1,5 @@
 # react-native-expo-auth
-## React native expo auth boilerplate
+## React native expo auth boilerplate (THIS PROJECT IS ABANDONED AND NEW VERSION IS BEING DEVELOPED IN A NEW REPOSITORY: https://github.com/jorge-cob/react-native-expo-auth-v2 )
 
 
 Template for react-native projects in need of firebase related authentication.
